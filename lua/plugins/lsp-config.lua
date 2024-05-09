@@ -17,6 +17,7 @@ return {
 				"html",
 				"jsonls",
 				"emmet_ls",
+        "lexical",
 			},
 		},
 	},
@@ -34,6 +35,11 @@ return {
 				capabilities = capabilities,
 			})
       --]]
+
+      lspconfig.elixirls.setup({
+        capabilities = capabilities,
+        cmd = {"/home/greff/.local/share/nvim/mason/packages/elixir-ls/language_server.sh"}
+      })
 
 			lspconfig.emmet_ls.setup({
 				capabilities = capabilitiesE,
@@ -94,8 +100,7 @@ return {
 	{
 		"Hrle97/nvim.diagnostic_virtual_text_config",
 		config = function()
-			require("nvim.diagnostic_virtual_text_config").setup({
-			})
+			require("nvim.diagnostic_virtual_text_config").setup({})
 		end,
 	},
 }
