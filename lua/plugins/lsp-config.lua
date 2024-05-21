@@ -1,5 +1,11 @@
 return {
   {
+    "Hrle97/nvim.diagnostic_virtual_text_config",
+    config = function()
+      require("nvim.diagnostic_virtual_text_config").setup({})
+    end,
+  },
+  {
     "williamboman/mason.nvim",
     config = function()
       require("mason").setup()
@@ -11,18 +17,21 @@ return {
     opts = {
       auto_install = true,
       ensure_installed = {
-        "gopls",
+        "marksman",  -- markdown
+        "jdtls",     -- java
+        "omnisharp", -- c#
+        "elixirls",
+        "emmet_ls",  -- jsx & tsx
+        "jsonls",
+        "cssls",
         "rust_analyzer",
         "lua_ls",
         "tsserver",
-        "cssls",
         "html",
-        "jsonls",
-        "emmet_ls", -- jsx & tsx
-        "elixirls",
-        "marksman", -- markdown
-        "omnisharp", -- c#
-        "jdtls", -- java
+        "gopls",
+        "zls",
+        "pyright",
+        "clangd",
       },
     },
   },
@@ -96,6 +105,18 @@ return {
         capabilities = capabilities,
       })
 
+      lspconfig.zls.setup({
+        capabilities = capabilities
+      })
+
+      lspconfig.pyright.setup({
+        capabilities = capabilities
+      })
+
+      lspconfig.clangd.setup({
+        capabilities = capabilities
+      })
+
       -- hover info
       vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
       -- function definition
@@ -104,12 +125,5 @@ return {
       vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, {})
     end,
   },
-  --[[
-	{
-		"Hrle97/nvim.diagnostic_virtual_text_config",
-		config = function()
-			require("nvim.diagnostic_virtual_text_config").setup({})
-		end,
-	},
-  --]]
+
 }
