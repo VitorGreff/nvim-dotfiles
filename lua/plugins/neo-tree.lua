@@ -12,7 +12,6 @@ return {
     vim.opt_local.relativenumber = true
 
     vim.keymap.set("n", "<C-n>", ":Neotree filesystem reveal right<CR>", {})
-    vim.keymap.set("n", "<C-b>", ":Neotree close<CR>", {})
+    vim.keymap.set("n", "<C-j>", ":Neotree close<CR>", {})
   end,
 }
-
