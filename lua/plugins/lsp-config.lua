@@ -15,11 +15,8 @@ return {
 		"williamboman/mason-lspconfig.nvim",
 		lazy = false,
 		opts = {
-			auto_install = true,
 			ensure_installed = {
 				"marksman", -- markdown
-				"jdtls", -- java
-				"omnisharp", -- c#
 				"elixirls",
 				"emmet_ls", -- jsx & tsx
 				"jsonls",
@@ -29,12 +26,11 @@ return {
 				"tsserver",
 				"html",
 				"gopls",
-				"zls",
 				"pyright",
 				"clangd",
 				-- "tailwindcss",
-        "svelte",
-        "ocamllsp",
+				"angularls",
+				"somesass_ls",
 			},
 		},
 	},
@@ -46,16 +42,7 @@ return {
 
 			local capabilitiesE = vim.lsp.protocol.make_client_capabilities()
 			capabilitiesE.textDocument.completion.completionItem.snippetSupport = true
-
 			lspconfig.marksman.setup({
-				capabilities = capabilities,
-			})
-
-			lspconfig.jdtls.setup({
-				capabilities = capabilities,
-			})
-
-			lspconfig.omnisharp.setup({
 				capabilities = capabilities,
 			})
 
@@ -116,10 +103,6 @@ return {
 				},
 			})
 
-			lspconfig.zls.setup({
-				capabilities = capabilities,
-			})
-
 			lspconfig.pyright.setup({
 				capabilities = capabilities,
 			})
@@ -128,13 +111,25 @@ return {
 				capabilities = capabilities,
 			})
 
-      lspconfig.svelte.setup({
-        capabilities = capabilities,
-      })
+			local project_library_path = "/usr/local/lib/node_modules/@angular/language-service"
+			local cmd = {
+				"ngserver",
+				"--stdio",
+				"--tsProbeLocations",
+				project_library_path,
+				"--ngProbeLocations",
+				project_library_path,
+			}
+			require("lspconfig").angularls.setup({
+				cmd = cmd,
+				on_new_config = function(new_config, new_root_dir)
+					new_config.cmd = cmd
+				end,
+			})
 
-      lspconfig.ocamllsp.setup({
-        capabilities = capabilities,
-      })
+			lspconfig.somesass_ls.setup({
+				capabilities = capabilities,
+			})
 
 			-- hover info
 			vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
