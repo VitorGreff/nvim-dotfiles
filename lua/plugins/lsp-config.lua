@@ -16,7 +16,7 @@ return {
 		lazy = false,
 		opts = {
 			ensure_installed = {
-				"marksman", -- markdown
+				-- "marksman", -- markdown
 				"elixirls",
 				"emmet_ls", -- jsx & tsx
 				"jsonls",
@@ -31,6 +31,8 @@ return {
 				-- "tailwindcss",
 				"angularls",
 				"somesass_ls",
+        "zls",
+        "markdown_oxide",
 			},
 		},
 	},
@@ -53,7 +55,7 @@ return {
 
 			lspconfig.emmet_ls.setup({
 				capabilities = capabilitiesE,
-				filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less" },
+				filetypes = { "typescriptreact", "javascriptreact", "css", "sass", "scss", "less" },
 				init_options = {
 					html = {
 						options = {
@@ -88,6 +90,7 @@ return {
 			})
 
 			lspconfig.html.setup({
+				filetypes = { "html", "angular.html" },
 				capabilities = capabilities,
 			})
 
@@ -110,7 +113,6 @@ return {
 			lspconfig.clangd.setup({
 				capabilities = capabilities,
 			})
-
 			local project_library_path = "/usr/local/lib/node_modules/@angular/language-service"
 			local cmd = {
 				"ngserver",
@@ -121,6 +123,7 @@ return {
 				project_library_path,
 			}
 			require("lspconfig").angularls.setup({
+				filetypes = { "typescript", "html", "typescriptreact", "typescript.tsx", "angular.html" },
 				cmd = cmd,
 				on_new_config = function(new_config, new_root_dir)
 					new_config.cmd = cmd
@@ -130,6 +133,14 @@ return {
 			lspconfig.somesass_ls.setup({
 				capabilities = capabilities,
 			})
+
+      lspconfig.zls.setup({
+        capabilities = capabilities,
+      })
+
+      lspconfig.markdown_oxide.setup({
+        capabilities = capabilities,
+      })
 
 			-- hover info
 			vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
