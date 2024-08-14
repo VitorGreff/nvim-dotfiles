@@ -16,7 +16,6 @@ return {
 		lazy = false,
 		opts = {
 			ensure_installed = {
-				-- "marksman", -- markdown
 				"elixirls",
 				"emmet_ls", -- jsx & tsx
 				"jsonls",
@@ -31,8 +30,9 @@ return {
 				-- "tailwindcss",
 				"angularls",
 				"somesass_ls",
-        "zls",
-        "markdown_oxide",
+				"zls",
+				"svelte",
+				"marksman",
 			},
 		},
 	},
@@ -44,9 +44,6 @@ return {
 
 			local capabilitiesE = vim.lsp.protocol.make_client_capabilities()
 			capabilitiesE.textDocument.completion.completionItem.snippetSupport = true
-			lspconfig.marksman.setup({
-				capabilities = capabilities,
-			})
 
 			lspconfig.elixirls.setup({
 				capabilities = capabilities,
@@ -113,6 +110,15 @@ return {
 			lspconfig.clangd.setup({
 				capabilities = capabilities,
 			})
+
+			lspconfig.svelte.setup({
+				capabilities = capabilities,
+			})
+
+			lspconfig.marksman.setup({
+				capabilities = capabilities,
+			})
+
 			local project_library_path = "/usr/local/lib/node_modules/@angular/language-service"
 			local cmd = {
 				"ngserver",
@@ -134,13 +140,9 @@ return {
 				capabilities = capabilities,
 			})
 
-      lspconfig.zls.setup({
-        capabilities = capabilities,
-      })
-
-      lspconfig.markdown_oxide.setup({
-        capabilities = capabilities,
-      })
+			lspconfig.zls.setup({
+				capabilities = capabilities,
+			})
 
 			-- hover info
 			vim.keymap.set("n", "K", vim.lsp.buf.hover, {})

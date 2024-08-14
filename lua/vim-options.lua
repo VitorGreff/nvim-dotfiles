@@ -13,3 +13,11 @@ vim.keymap.set("n", "<leader>q", ":q!<CR>", { desc = "Force quit" })
 vim.api.nvim_set_keymap("n", "<leader>ll", "iλ<Esc>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>st", ":SupermavenStart<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>sp", ":SupermavenStop<CR>", { noremap = true, silent = true })
+
+vim.api.nvim_create_augroup("YankHighlight", { clear = true })
+vim.api.nvim_create_autocmd("TextYankPost", {
+	group = "YankHighlight",
+	callback = function()
+		vim.highlight.on_yank({ higroup = "IncSearch", timeout = 150 })
+	end,
+})
