@@ -1,13 +1,13 @@
--- return {
--- 	"catppuccin/nvim",
--- 	name = "catppuccin",
--- 	config = function()
--- 		require("catppuccin").setup({
--- 			transparent_background = false,
--- 		})
--- 		vim.cmd.colorscheme("catppuccin-macchiato")
--- 	end,
--- }
+return {
+	"catppuccin/nvim",
+	name = "catppuccin",
+	config = function()
+		require("catppuccin").setup({
+			transparent_background = false,
+		})
+		vim.cmd.colorscheme("catppuccin-mocha")
+	end,
+}
 
 -- return {
 --   "ellisonleao/gruvbox.nvim",
@@ -83,26 +83,26 @@
 -- 	end,
 -- }
 
-return {
-	{
-		"datsfilipe/vesper.nvim",
-		config = function()
-			require("vesper").setup({
-				transparent = true, -- Boolean: Sets the background to transparent
-				italics = {
-					comments = true, -- Boolean: Italicizes comments
-					keywords = true, -- Boolean: Italicizes keywords
-					functions = true, -- Boolean: Italicizes functions
-					strings = true, -- Boolean: Italicizes strings
-					variables = true, -- Boolean: Italicizes variables
-				},
-				overrides = {}, -- A dictionary of group names, can be a function returning a dictionary or a table.
-				palette_overrides = {},
-			})
-			vim.cmd.colorscheme("vesper")
-		end,
-	},
-}
+-- return {
+-- 	{
+-- 		"datsfilipe/vesper.nvim",
+-- 		config = function()
+-- 			require("vesper").setup({
+-- 				transparent = true, -- Boolean: Sets the background to transparent
+-- 				italics = {
+-- 					comments = true, -- Boolean: Italicizes comments
+-- 					keywords = true, -- Boolean: Italicizes keywords
+-- 					functions = true, -- Boolean: Italicizes functions
+-- 					strings = true, -- Boolean: Italicizes strings
+-- 					variables = true, -- Boolean: Italicizes variables
+-- 				},
+-- 				overrides = {}, -- A dictionary of group names, can be a function returning a dictionary or a table.
+-- 				palette_overrides = {},
+-- 			})
+-- 			vim.cmd.colorscheme("vesper")
+-- 		end,
+-- 	},
+-- }
 
 -- return {
 -- 	"sainnhe/sonokai",
