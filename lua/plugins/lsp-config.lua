@@ -1,10 +1,4 @@
 return {
-	-- {
-	--   "Hrle97/nvim.diagnostic_virtual_text_config",
-	--   config = function()
-	--     require("nvim.diagnostic_virtual_text_config").setup({})
-	--   end,
-	-- },
 	{
 		"williamboman/mason.nvim",
 		config = function()
@@ -22,17 +16,18 @@ return {
 				"cssls",
 				"rust_analyzer",
 				"lua_ls",
-				"tsserver",
 				"html",
 				"gopls",
 				"pyright",
 				"clangd",
-				-- "tailwindcss",
 				"angularls",
 				"somesass_ls",
 				"zls",
 				"svelte",
 				"marksman",
+				"eslint",
+				"tailwindcss",
+				"jdtls",
 			},
 		},
 	},
@@ -44,13 +39,12 @@ return {
 			local capabilitiesE = vim.lsp.protocol.make_client_capabilities()
 			capabilitiesE.textDocument.completion.completionItem.snippetSupport = true
 
-			local capabilitiesE = vim.lsp.protocol.make_client_capabilities()
 			capabilitiesE.textDocument.completion.completionItem.snippetSupport = true
 
-			lspconfig.elixirls.setup({
-				capabilities = capabilities,
-				cmd = { "/home/greff/.local/share/nvim/mason/packages/elixir-ls/language_server.sh" },
-			})
+			-- lspconfig.elixirls.setup({
+			--   capabilities = capabilities,
+			--   cmd = { "/home/greff/.local/share/nvim/mason/packages/elixir-ls/language_server.sh" },
+			-- })
 
 			lspconfig.emmet_ls.setup({
 				capabilities = capabilitiesE,
@@ -84,10 +78,6 @@ return {
 				capabilities = capabilities,
 			})
 
-			lspconfig.tsserver.setup({
-				capabilities = capabilities,
-			})
-
 			lspconfig.html.setup({
 				filetypes = { "html", "angular.html" },
 				capabilities = capabilities,
@@ -113,30 +103,30 @@ return {
 				capabilities = capabilities,
 			})
 
-			lspconfig.svelte.setup({
-				capabilities = capabilities,
-			})
+			-- lspconfig.svelte.setup({
+			--   capabilities = capabilities,
+			-- })
 
 			lspconfig.marksman.setup({
 				capabilities = capabilities,
 			})
 
-			local project_library_path = "/usr/local/lib/node_modules/@angular/language-service"
-			local cmd = {
-				"ngserver",
-				"--stdio",
-				"--tsProbeLocations",
-				project_library_path,
-				"--ngProbeLocations",
-				project_library_path,
-			}
-			require("lspconfig").angularls.setup({
-				filetypes = { "typescript", "html", "typescriptreact", "typescript.tsx", "angular.html" },
-				cmd = cmd,
-				on_new_config = function(new_config, new_root_dir)
-					new_config.cmd = cmd
-				end,
-			})
+			-- local project_library_path = "/usr/local/lib/node_modules/@angular/language-service"
+			-- local cmd = {
+			--   "ngserver",
+			--   "--stdio",
+			--   "--tsProbeLocations",
+			--   project_library_path,
+			--   "--ngProbeLocations",
+			--   project_library_path,
+			-- }
+			-- require("lspconfig").angularls.setup({
+			--   filetypes = { "typescript", "html", "typescriptreact", "typescript.tsx", "angular.html" },
+			--   cmd = cmd,
+			--   on_new_config = function(new_config, new_root_dir)
+			--     new_config.cmd = cmd
+			--   end,
+			-- })
 
 			lspconfig.somesass_ls.setup({
 				capabilities = capabilities,
@@ -146,9 +136,28 @@ return {
 				capabilities = capabilities,
 			})
 
-			-- hover info
+			lspconfig.ts_ls.setup({
+				capabilities = capabilities,
+			})
+
+			-- lspconfig.tailwindcss.setup({
+			--   capabilities = capabilities,
+			-- })
+
+			-- lspconfig.jdtls.setup({
+			--   capabilities = capabilities,
+			--   cmd = {
+			--     "jdtls",
+			--     "--jvm-arg=" .. string.format(
+			--       "-javaagent:%s",
+			--       vim.fn.expand("/home/greff/.local/share/nvim/mason/packages/jdtls/lombok.jar")
+			--     ),
+			--   },
+			-- })
+
+			-- show info
 			vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
-			-- function definition
+			-- go to definition
 			vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, {})
 			-- code actions
 			vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, {})
