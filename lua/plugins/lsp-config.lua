@@ -41,10 +41,10 @@ return {
 
 			capabilitiesE.textDocument.completion.completionItem.snippetSupport = true
 
-			-- lspconfig.elixirls.setup({
-			--   capabilities = capabilities,
-			--   cmd = { "/home/greff/.local/share/nvim/mason/packages/elixir-ls/language_server.sh" },
-			-- })
+			lspconfig.elixirls.setup({
+				capabilities = capabilities,
+				cmd = { "/home/greff/.local/share/nvim/mason/packages/elixir-ls/language_server.sh" },
+			})
 
 			lspconfig.emmet_ls.setup({
 				capabilities = capabilitiesE,
@@ -103,9 +103,9 @@ return {
 				capabilities = capabilities,
 			})
 
-			-- lspconfig.svelte.setup({
-			--   capabilities = capabilities,
-			-- })
+			lspconfig.svelte.setup({
+				capabilities = capabilities,
+			})
 
 			lspconfig.marksman.setup({
 				capabilities = capabilities,
@@ -140,9 +140,9 @@ return {
 				capabilities = capabilities,
 			})
 
-			-- lspconfig.tailwindcss.setup({
-			--   capabilities = capabilities,
-			-- })
+			lspconfig.tailwindcss.setup({
+				capabilities = capabilities,
+			})
 
 			-- lspconfig.jdtls.setup({
 			--   capabilities = capabilities,
